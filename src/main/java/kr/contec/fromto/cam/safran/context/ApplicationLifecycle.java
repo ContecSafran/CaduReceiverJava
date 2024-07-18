@@ -42,7 +42,7 @@ public class ApplicationLifecycle {
     public void start() {
 
         HdrCaduReceiverCam geoSyncKubucCam = (HdrCaduReceiverCam) CamFactory.get("key", "name", HdrCaduReceiverVersion.SATCORE, config.getIpAddress());
-        geoSyncKubucCam.setConfig(config,writePath);
+        geoSyncKubucCam.start(config,writePath);
     }
 
 }

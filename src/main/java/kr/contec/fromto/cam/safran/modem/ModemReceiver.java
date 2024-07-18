@@ -48,7 +48,11 @@ public class ModemReceiver  implements TcpConnectionListenable {
         int headerMark = ConverterUtils.toInt(data, 0);
         int tailMark = ConverterUtils.toInt(data, data.length - 4);
         int receiveSize = ConverterUtils.toInt(data,4);
-        return (headerMark == 1234567890) && (tailMark == -1234567890) && (receiveSize == data.length) && (data.length > 56);
+        boolean result = (headerMark == 1234567890) && (tailMark == -1234567890) && (receiveSize == data.length) && (data.length > 56);
+        if(!result){
+            int dd = 0;
+        }
+        return result;
     }
     public void write(byte[] data) {
         try {
@@ -70,7 +74,8 @@ public class ModemReceiver  implements TcpConnectionListenable {
                     writeOffset += tmBlockSize;
                 }
                 caduOutputStream.flush();
-            }{
+            }
+            else{
                 log.error("수신 받은 데이터가 사프란 구조가 아닙니다");
             }
         } catch (IOException e) {

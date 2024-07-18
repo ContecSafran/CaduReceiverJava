@@ -28,21 +28,10 @@ public class HdrCaduReceiverCam extends Cam<HdrCaduReceiverControl, HdrCaduRecei
      *
      * @param config 설정
      */
-    public void setConfig(ApplicationConfig config, Path writePath){
+    public void start(ApplicationConfig config, Path writePath){
         this.writePath = writePath;
         this.applicationConfig = config;
-    }
-    public HdrCaduReceiverCam(CamConfig config) {
-        super(config);
         CamConfig.Access access = accesses.get(0);
-        //access.getPort();
-        // TCP Client 생성
-        /*
-        tcpClient = new TcpClient(meta, accesses.get(0),
-                () -> List.of(new LengthFieldBasedFrameDecoder(10000000,4, 4,-8,0),
-                        new SafranByteToMessageDecoder(),
-                        new SafranDecoder()),
-                () -> List.of(new SafranEncoder()), this);*/
         LocalDateTime dateTime = LocalDateTime.now(ZoneOffset.UTC);
         String timeStr = String.format("%s_%s",
                 dateTime.format(DateTimeFormatter.ofPattern("yyyyMMdd")),
@@ -79,6 +68,9 @@ public class HdrCaduReceiverCam extends Cam<HdrCaduReceiverControl, HdrCaduRecei
                 modemReceiver[i].init();
             }
         }
+    }
+    public HdrCaduReceiverCam(CamConfig config) {
+        super(config);
     }
 
     @Override
