@@ -17,6 +17,5 @@ public class SafranDecoder extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         byte[] buffer = (byte[]) msg;
-       // receiveCallable.receive(buffer,chId);
     }
 }
